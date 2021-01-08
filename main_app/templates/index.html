@@ -13,16 +13,31 @@
     {% if widgets|length == 0 %}
         <p>No items on the list yet...</p>
     {% else %}
-        <ul>
-            {% for widget in widgets %}
-                <li>
-                    {{ widget }}
-                    -
-                    <a href="{% url 'delete_todo' todo.id %}">X</a>
-                </li>
-            {% endfor %}
-        </ul>
+    <table class="pure-table pure-table-striped">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Quanitity</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for widget in widgets %}
+        <tr>
+          <td>{{ widget.description }}</td>
+          <td>{{ widget.quanitity }}</td>
+          <td><a href="">X</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
     {% endif %}
     <hr>
+    <p>Add widget</p>
+    <form action="{% url 'add_widget' %}" method="POST">
+      {% csrf_token %}
+      {{ widget_form.as_p }}
+      <input type="submit" value="Add Feeding" class="btn">
+    </form>
 </body>
 </html>
