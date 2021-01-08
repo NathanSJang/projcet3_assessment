@@ -17,3 +17,8 @@ def add_widget(request):
         new_widget = form.save(commit=False)
         new_widget.save()
     return redirect('index')
+
+
+def delete_widget(request, widget_id):
+    Widget.objects.get(id=widget_id).delete()
+    return redirect('/')
